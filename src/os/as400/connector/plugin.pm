@@ -31,16 +31,20 @@ sub new {
 
     $self->{version} = '0.1';
     $self->{modes} = {
-        'command'         => 'os::as400::connector::mode::command',
-        'disks'           => 'os::as400::connector::mode::disks',
-        'jobs'            => 'os::as400::connector::mode::jobs',
-        'job-queues'      => 'os::as400::connector::mode::jobqueues',
-        'list-disks'      => 'os::as400::connector::mode::listdisks',
-        'list-subsystems' => 'os::as400::connector::mode::listsubsystems',
-        'message-queue'   => 'os::as400::connector::mode::messagequeue',
-        'page-faults'     => 'os::as400::connector::mode::pagefaults',
-        'system'          => 'os::as400::connector::mode::system',
-        'subsystems'      => 'os::as400::connector::mode::subsystems'
+        'command'                    => 'os::as400::connector::mode::command',
+        'disks'                      => 'os::as400::connector::mode::disks',
+        'jobs'                       => 'os::as400::connector::mode::jobs',
+        'job-queues'                 => 'os::as400::connector::mode::jobqueues',
+        'journal-receivers'          => 'os::as400::connector::mode::journalreceivers',
+        'list-disks'                 => 'os::as400::connector::mode::listdisks',
+        'list-quickedd-environments' => 'os::as400::connector::mode::listquickeddenvironments',
+        'list-subsystems'            => 'os::as400::connector::mode::listsubsystems',
+        'message-queue'              => 'os::as400::connector::mode::messagequeue',
+        'page-faults'                => 'os::as400::connector::mode::pagefaults',
+        'quickedd-environments'      => 'os::as400::connector::mode::quickeddenvironments',
+        'quickedd-license'           => 'os::as400::connector::mode::quickeddlicense',
+        'system'                     => 'os::as400::connector::mode::system',
+        'subsystems'                 => 'os::as400::connector::mode::subsystems'
     };
 
     $self->{custom_modes}->{api} = 'os::as400::connector::custom::api';

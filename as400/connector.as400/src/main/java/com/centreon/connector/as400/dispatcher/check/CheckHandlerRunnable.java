@@ -83,6 +83,14 @@ public class CheckHandlerRunnable implements Runnable {
                 data = this.getNewMessageInMessageQueue();
             } else if (check.equalsIgnoreCase("workWithProblem")) {
                 data = this.workWithProblem();
+            } else if (check.equalsIgnoreCase("getQuickEddEnvironments")) {
+                data = this.getQuickEddEnvironments();
+            } else if (check.equalsIgnoreCase("listQuickEddEnvironments")) {
+                data = this.listQuickEddEnvironments();
+            } else if (check.equalsIgnoreCase("getQuickEddLicense")) {
+                data = this.getQuickEddLicense();
+            } else if (check.equalsIgnoreCase("getJournalReceivers")) {
+                data = this.getJournalReceivers();
             } else if (check.equalsIgnoreCase("dumpAll")) {
                 this.dumpAll();
                 data = new ResponseData(ResponseData.statusOk, "dump done");
@@ -130,6 +138,63 @@ public class CheckHandlerRunnable implements Runnable {
             lang != null ? lang.toString() : null);
 
         return data;
+    }
+
+    private String getStringArg(final String key) {
+        final Object arg = this.client.getAs400Arg(key);
+        if (arg == null) {
+            return null;
+        }
+        final String value = arg.toString().trim();
+        return value.isEmpty() ? null : value;
+    }
+
+    /** accepts a JSON array of strings or a comma separated string */
+    private List<String> getStringListArg(final String key) {
+        final Object arg = this.client.getAs400Arg(key);
+        final List<String> values = new ArrayList<String>();
+        if (arg == null) {
+            return values;
+        }
+        if (arg instanceof List) {
+            for (final Object o : (List<?>) arg) {
+                if (o != null && !o.toString().trim().isEmpty()) {
+                    values.add(o.toString().trim());
+                }
+            }
+        } else {
+            for (final String o : arg.toString().split(",")) {
+                if (!o.trim().isEmpty()) {
+                    values.add(o.trim());
+                }
+            }
+        }
+        return values;
+    }
+
+    private ResponseData getQuickEddEnvironments() throws Exception {
+        return this.checkDispatcher.getQuickEddHandler().getEnvironments(
+            this.getStringArg("libQedd"), this.getStringArg("libProg"), this.getStringListArg("environments"));
+    }
+
+    private ResponseData listQuickEddEnvironments() throws Exception {
+        return this.checkDispatcher.getQuickEddHandler().listEnvironments(
+            this.getStringArg("libQedd"), this.getStringArg("libProg"));
+    }
+
+    private ResponseData getQuickEddLicense() throws Exception {
+        return this.checkDispatcher.getQuickEddHandler().getLicense(this.getStringArg("libLicense"));
+    }
+
+    private ResponseData getJournalReceivers() throws Exception {
+        long minSequence = 0;
+        final String min = this.getStringArg("minSequence");
+        if (min != null) {
+            minSequence = (long) Double.parseDouble(min);
+        }
+        final String exclude = this.getStringArg("excludeMaxOpt3");
+        final boolean excludeMaxOpt3 = exclude == null || !(exclude.equals("0") || exclude.equalsIgnoreCase("false"));
+        return this.checkDispatcher.getJournalReceiverHandler().getJournalReceivers(minSequence, excludeMaxOpt3);
     }
 
     private ResponseData listDisks() throws Exception {

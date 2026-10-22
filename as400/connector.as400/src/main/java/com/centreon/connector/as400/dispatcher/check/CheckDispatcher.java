@@ -37,6 +37,8 @@ import com.centreon.connector.as400.check.handler.ICommandHandler;
 import com.centreon.connector.as400.check.handler.IDiskHandler;
 import com.centreon.connector.as400.check.handler.IJobHandler;
 import com.centreon.connector.as400.check.handler.IJobQueueHandler;
+import com.centreon.connector.as400.check.handler.IJournalReceiverHandler;
+import com.centreon.connector.as400.check.handler.IQuickEddHandler;
 import com.centreon.connector.as400.check.handler.IMessageQueueHandler;
 import com.centreon.connector.as400.check.handler.ISubSystemHandler;
 import com.centreon.connector.as400.check.handler.ISystemHandler;
@@ -44,6 +46,8 @@ import com.centreon.connector.as400.check.handler.impl.CommandHandler;
 import com.centreon.connector.as400.check.handler.impl.DiskHandler;
 import com.centreon.connector.as400.check.handler.impl.JobHandler;
 import com.centreon.connector.as400.check.handler.impl.JobQueueHandler;
+import com.centreon.connector.as400.check.handler.impl.JournalReceiverHandler;
+import com.centreon.connector.as400.check.handler.impl.QuickEddHandler;
 import com.centreon.connector.as400.check.handler.impl.SubSystemHandler;
 import com.centreon.connector.as400.check.handler.impl.SystemHandler;
 import com.centreon.connector.as400.check.handler.msgqueue.CachedMessageQueueHandler;
@@ -239,6 +243,14 @@ public class CheckDispatcher {
 
     public IJobQueueHandler getJobQueueHandler() throws AS400SecurityException, IOException {
         return new JobQueueHandler(this.host, this.login, this.password, this.ssl);
+    }
+
+    public IQuickEddHandler getQuickEddHandler() throws AS400SecurityException, IOException {
+        return new QuickEddHandler(this.host, this.login, this.password, this.ssl);
+    }
+
+    public IJournalReceiverHandler getJournalReceiverHandler() throws AS400SecurityException, IOException {
+        return new JournalReceiverHandler(this.host, this.login, this.password, this.ssl);
     }
 
     public WorkWithProblemHandler getWrkPrbHandler() throws AS400SecurityException, IOException {

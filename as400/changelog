@@ -1,3 +1,7 @@
+2026-10-22 - 2.1.0
+ * Added QuickEDD checks: getQuickEddEnvironments, listQuickEddEnvironments, getQuickEddLicense
+ * Added journal receivers sequence check: getJournalReceivers
+
 2026-03-27 Sylvain Cresto <scresto@centreon.com> - 2.0.8
  * Improved privilege management
 
