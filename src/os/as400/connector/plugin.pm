@@ -44,6 +44,7 @@ sub new {
         'quickedd-environments'      => 'os::as400::connector::mode::quickeddenvironments',
         'quickedd-license'           => 'os::as400::connector::mode::quickeddlicense',
         'system'                     => 'os::as400::connector::mode::system',
+        'sql'                        => 'os::as400::connector::mode::sql',
         'subsystems'                 => 'os::as400::connector::mode::subsystems'
     };
 

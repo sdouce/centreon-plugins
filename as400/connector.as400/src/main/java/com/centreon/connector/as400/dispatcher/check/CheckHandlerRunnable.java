@@ -91,6 +91,8 @@ public class CheckHandlerRunnable implements Runnable {
                 data = this.getQuickEddLicense();
             } else if (check.equalsIgnoreCase("getJournalReceivers")) {
                 data = this.getJournalReceivers();
+            } else if (check.equalsIgnoreCase("executeSql")) {
+                data = this.executeSql();
             } else if (check.equalsIgnoreCase("dumpAll")) {
                 this.dumpAll();
                 data = new ResponseData(ResponseData.statusOk, "dump done");
@@ -195,6 +197,16 @@ public class CheckHandlerRunnable implements Runnable {
         final String exclude = this.getStringArg("excludeMaxOpt3");
         final boolean excludeMaxOpt3 = exclude == null || !(exclude.equals("0") || exclude.equalsIgnoreCase("false"));
         return this.checkDispatcher.getJournalReceiverHandler().getJournalReceivers(minSequence, excludeMaxOpt3);
+    }
+
+    private ResponseData executeSql() throws Exception {
+        int maxRows = 100;
+        final String max = this.getStringArg("maxRows");
+        if (max != null) {
+            maxRows = (int) Double.parseDouble(max);
+        }
+        final Object request = this.client.getAs400Arg("request");
+        return this.checkDispatcher.getSqlHandler().executeQuery(request != null ? request.toString() : null, maxRows);
     }
 
     private ResponseData listDisks() throws Exception {
