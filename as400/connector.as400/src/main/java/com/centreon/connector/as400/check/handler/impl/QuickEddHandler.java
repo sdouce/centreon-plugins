@@ -29,7 +29,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.ibm.as400.access.AS400;
@@ -145,16 +144,35 @@ public class QuickEddHandler extends AbstractHandler implements IQuickEddHandler
         return ((String) new AS400Text(32000, system).toObject(p[0].getOutputData())).trim();
     }
 
-    /** Best effort split of getEnvList output into environment names (to be validated on real systems). */
-    static List<String> splitEnvList(final String raw) {
-        final Set<String> names = new LinkedHashSet<String>();
-        for (final String token : raw.toUpperCase().split("[\\s,;|]+")) {
-            final Matcher m = NAME.matcher(token);
-            if (m.matches()) {
-                names.add(token);
+    /**
+     * getEnvList output: records separated by ',', each record is "&lt;description&gt; &lt;name&gt;"
+     * (e.g. "PRODUCTION SITE  ENV1,"): the environment name is the last word of the record.
+     * Returns [name, description] pairs.
+     */
+    static List<String[]> parseEnvList(final String raw) {
+        final List<String[]> envs = new ArrayList<String[]>();
+        final Set<String> seen = new LinkedHashSet<String>();
+        for (final String record : raw.split(",")) {
+            final String r = record.trim();
+            if (r.isEmpty()) {
+                continue;
+            }
+            final int sp = r.lastIndexOf(' ');
+            final String name = (sp < 0 ? r : r.substring(sp + 1)).toUpperCase();
+            final String description = sp < 0 ? "" : r.substring(0, sp).trim();
+            if (NAME.matcher(name).matches() && seen.add(name)) {
+                envs.add(new String[] { name, description });
             }
         }
-        return new ArrayList<String>(names);
+        return envs;
+    }
+
+    static List<String> splitEnvList(final String raw) {
+        final List<String> names = new ArrayList<String>();
+        for (final String[] e : parseEnvList(raw)) {
+            names.add(e[0]);
+        }
+        return names;
     }
 
     /* ------------------------------------------------------------------ */
@@ -224,9 +242,10 @@ public class QuickEddHandler extends AbstractHandler implements IQuickEddHandler
         try {
             final ServiceProgramCall spgm = init(system, libQedd, libProg);
             final String raw = rawEnvList(system, spgm);
-            for (final String name : splitEnvList(raw)) {
+            for (final String[] env : parseEnvList(raw)) {
                 final HashMap<String, Object> attrs = new HashMap<String, Object>();
-                attrs.put("name", name);
+                attrs.put("name", env[0]);
+                attrs.put("description", env[1]);
                 data.getResult().add(attrs);
             }
             data.setMessage(raw);

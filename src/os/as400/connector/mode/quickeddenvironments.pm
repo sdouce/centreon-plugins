@@ -161,9 +161,10 @@ sub manage_selection {
             name => $entry->{name},
             status => $failed ? 'error' : $entry->{active},
             message => $failed ? $entry->{message} : '',
-            errors => $entry->{errors},
-            waiting => $entry->{waiting},
-            delay => $entry->{delay}
+            # QuickEDD returns -1 when a value is not available: no metric in that case
+            errors => (defined($entry->{errors}) && $entry->{errors} >= 0) ? $entry->{errors} : undef,
+            waiting => (defined($entry->{waiting}) && $entry->{waiting} >= 0) ? $entry->{waiting} : undef,
+            delay => (defined($entry->{delay}) && $entry->{delay} >= 0) ? $entry->{delay} : undef
         };
         $self->{global}->{total}++;
     }
