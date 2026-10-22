@@ -61,7 +61,9 @@ sub run {
 
     my $results = $self->manage_selection(%options);
     foreach my $entry (@{$results->{result}}) {
-        $self->{output}->output_add(long_msg => sprintf('[name: %s]', $entry->{name}));
+        $self->{output}->output_add(
+            long_msg => sprintf('[name: %s][description: %s]', $entry->{name}, defined($entry->{description}) ? $entry->{description} : '')
+        );
     }
     $self->{output}->output_add(long_msg => 'raw getEnvList output: ' . $results->{message}, debug => 1)
         if (defined($results->{message}));
@@ -77,7 +79,7 @@ sub run {
 sub disco_format {
     my ($self, %options) = @_;
 
-    $self->{output}->add_disco_format(elements => ['name']);
+    $self->{output}->add_disco_format(elements => ['name', 'description']);
 }
 
 sub disco_show {
@@ -85,7 +87,10 @@ sub disco_show {
 
     my $results = $self->manage_selection(%options);
     foreach my $entry (@{$results->{result}}) {
-        $self->{output}->add_disco_entry(name => $entry->{name});
+        $self->{output}->add_disco_entry(
+            name => $entry->{name},
+            description => defined($entry->{description}) ? $entry->{description} : ''
+        );
     }
 }
 
