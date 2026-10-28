@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import com.ibm.as400.access.AS400;
 import com.ibm.as400.access.ProgramCall;
 import com.ibm.as400.access.ProgramParameter;
+import com.ibm.as400.access.SystemPool;
 import com.ibm.as400.access.SystemStatus;
 import com.centreon.connector.as400.Conf;
 import com.centreon.connector.as400.dispatcher.check.ResponseData;
@@ -34,7 +35,7 @@ public class SystemHandlerTest {
     System.setOut(new PrintStream(outContent));
     try {
       SystemStatus as400 = mock(SystemStatus.class);
-      when(as400.getSystemPools()).thenReturn(new Vector<Object>().elements());
+      when(as400.getSystemPools()).thenReturn(new Vector<SystemPool>().elements());
       SystemHandler sh = new SystemHandler(null, null, null, as400, null);
       sh.dumpSystem();
     } finally {
