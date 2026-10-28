@@ -2,6 +2,7 @@
  * Added QuickEDD checks: getQuickEddEnvironments, listQuickEddEnvironments, getQuickEddLicense
  * Added journal receivers sequence check: getJournalReceivers
  * Added read-only SQL request: executeSql
+ * Upgraded jt400 (JTOpen) from 10.7 to 21.0.7: sign-on failed on IBM i 7.6 ("Password is incorrect")
 
 2026-03-27 Sylvain Cresto <scresto@centreon.com> - 2.0.8
  * Improved privilege management
