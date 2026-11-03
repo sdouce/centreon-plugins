@@ -1,0 +1,9 @@
+{
+    "pkg_name": "centreon-plugin-Hardware-Servers-Ibm-Hmc-Restapi",
+    "pkg_summary": "Centreon Plugin to monitor IBM Power servers through the HMC REST API",
+    "plugin_name": "centreon_ibm_hmc_restapi.pl",
+    "files": [
+        "centreon/plugins/script_custom.pm",
+        "hardware/server/ibm/hmc/restapi/"
+    ]
+}
