@@ -58,6 +58,7 @@ centreonvault
 --cert-pkcs12
 --cert-pwd
 cgroup
+CLIRunner
 CloudWatch
 CommServe
 Commvault
@@ -96,6 +97,7 @@ DSM
 Ekara
 -EncodedCommand
 env
+errlog
 ESX
 eth
 Exense
@@ -135,6 +137,8 @@ GRAPHQL
 HAProxy
 HashiCorp
 hashicorpvault
+HMC
+hmcviewer
 HPE
 HTTPR
 Huawei
@@ -194,6 +198,7 @@ LIBSSH
 Libvirt
 license-instances-usage-prct
 Loggly
+LPAR
 LSP
 LTE
 LUN
@@ -259,6 +264,7 @@ NLCapacity
 -NoLogo
 --nomachineaccount
 notapplicable
+NPIV
 NRPE
 NSClient
 --ntlmv2
@@ -295,6 +301,7 @@ Palo
 partiallyActive
 passthrough
 --patch-redhat
+PCM
 perfdata
 pfSense
 physicaldrive
@@ -306,6 +313,7 @@ Postgres
 powershell
 powershell.exe
 PPID
+PR_shared
 prct
 Primera
 Procurve
@@ -326,6 +334,7 @@ ReplicaJobSession
 RestAPI
 RFC1628
 RMAN
+RMC
 RRDCached
 rsrp
 rsrq
@@ -333,6 +342,11 @@ RSS
 rssi
 RTT
 Rubrik
+UDID
+vfc
+VIOS
+viosvrcmd
+vscsi
 µs
 Sansymphony
 SAS

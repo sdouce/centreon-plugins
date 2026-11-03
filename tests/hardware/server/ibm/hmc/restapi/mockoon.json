@@ -1,0 +1,602 @@
+{
+    "uuid": "02b4e7f7-6e9a-5dd7-a42d-66349d8bfe7d",
+    "lastMigration": 33,
+    "name": "IBM HMC REST API",
+    "endpointPrefix": "",
+    "latency": 0,
+    "port": 3000,
+    "hostname": "",
+    "folders": [],
+    "rootChildren": [
+        {
+            "type": "route",
+            "uuid": "c900d19b-ec54-5bd4-9cd6-f92e478001db"
+        },
+        {
+            "type": "route",
+            "uuid": "8a7f8fef-b5f0-56d8-b851-d82d0834eddd"
+        },
+        {
+            "type": "route",
+            "uuid": "57c45d2a-72fb-5a98-839e-23d4ace9440e"
+        },
+        {
+            "type": "route",
+            "uuid": "a847d90c-a586-5b5e-a238-5e318b2e29bd"
+        },
+        {
+            "type": "route",
+            "uuid": "85e1962b-590b-5cfa-9fb9-2f936d809a94"
+        },
+        {
+            "type": "route",
+            "uuid": "7ed4a057-ccb4-530b-97b5-684840f555a7"
+        },
+        {
+            "type": "route",
+            "uuid": "a7d0fb30-d65f-5e04-9b5f-24b446985ba5"
+        },
+        {
+            "type": "route",
+            "uuid": "ae463bf4-b4c6-56d9-b62c-5b1599d5efee"
+        },
+        {
+            "type": "route",
+            "uuid": "0736e6ab-4893-5315-b2ba-08c71b75a5fb"
+        },
+        {
+            "type": "route",
+            "uuid": "ca7496fa-8065-54cb-bedd-b985a172743c"
+        },
+        {
+            "type": "route",
+            "uuid": "1b3a1a58-675f-5fc9-91eb-4c83ce5790b5"
+        },
+        {
+            "type": "route",
+            "uuid": "1b027bb3-ce1b-5bba-b6f8-2d2adfce4b32"
+        },
+        {
+            "type": "route",
+            "uuid": "03bc0d37-7d7e-5029-9496-630ed9d2347c"
+        }
+    ],
+    "proxyMode": false,
+    "proxyHost": "",
+    "proxyRemovePrefix": false,
+    "tlsOptions": {
+        "enabled": false,
+        "type": "CERT",
+        "pfxPath": "",
+        "certPath": "",
+        "keyPath": "",
+        "caPath": "",
+        "passphrase": ""
+    },
+    "cors": true,
+    "headers": [],
+    "proxyReqHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "proxyResHeaders": [
+        {
+            "key": "",
+            "value": ""
+        }
+    ],
+    "data": [],
+    "callbacks": [],
+    "routes": [
+        {
+            "uuid": "c900d19b-ec54-5bd4-9cd6-f92e478001db",
+            "type": "http",
+            "documentation": "",
+            "method": "put",
+            "endpoint": "rest/api/web/Logon",
+            "responses": [
+                {
+                    "uuid": "cd61e8fa-ade9-50dd-b9b9-a75eb5c8b8f0",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<LogonResponse xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><X-API-Session kb=\"ROR\" kxe=\"false\">hmc-session-token</X-API-Session></LogonResponse>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/vnd.ibm.powervm.web+xml; type=LogonResponse"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "8a7f8fef-b5f0-56d8-b851-d82d0834eddd",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/ManagedSystem/quick/All",
+            "responses": [
+                {
+                    "uuid": "0720b080-a7b0-59d1-93d1-7c0dceb44de3",
+                    "body": "[{\"UUID\": \"b1f2c3d4-0000-3000-8000-000000000001\", \"SystemName\": \"Server-9009-42A-SN7860001\", \"State\": \"operating\", \"MachineType\": \"9009\", \"Model\": \"42A\", \"SerialNumber\": \"7860001\"}, {\"UUID\": \"b1f2c3d4-0000-3000-8000-000000000002\", \"SystemName\": \"Server-9080-M9S-SN7860002\", \"State\": \"error\", \"MachineType\": \"9080\", \"Model\": \"M9S\", \"SerialNumber\": \"7860002\"}]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "57c45d2a-72fb-5a98-839e-23d4ace9440e",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/quick/All",
+            "responses": [
+                {
+                    "uuid": "f3817f63-4247-5bcf-9a40-cd9212fc3a56",
+                    "body": "[{\"UUID\": \"3a1b0000-0000-4000-8000-000000000001\", \"PartitionID\": 3, \"PartitionName\": \"aix01\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"running\", \"RMCState\": \"active\", \"ReferenceCode\": \"\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000002\", \"PartitionID\": 4, \"PartitionName\": \"aix02\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"not activated\", \"RMCState\": \"inactive\", \"ReferenceCode\": \"00000000\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000003\", \"PartitionID\": 5, \"PartitionName\": \"lnx01\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"error\", \"RMCState\": \"inactive\", \"ReferenceCode\": \"B2001230\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000004\", \"PartitionID\": 1, \"PartitionName\": \"vios1\", \"PartitionType\": \"Virtual IO Server\", \"PartitionState\": \"running\", \"RMCState\": \"active\", \"ReferenceCode\": \"\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000005\", \"PartitionID\": 2, \"PartitionName\": \"vios2\", \"PartitionType\": \"Virtual IO Server\", \"PartitionState\": \"running\", \"RMCState\": \"inactive\", \"ReferenceCode\": \"\"}]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "a847d90c-a586-5b5e-a238-5e318b2e29bd",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000002/LogicalPartition/quick/All",
+            "responses": [
+                {
+                    "uuid": "cd5dd821-0262-5b77-859c-e641cb13629e",
+                    "body": "[{\"UUID\": \"3a1b0000-0000-4000-8000-000000000101\", \"PartitionID\": 1, \"PartitionName\": \"db01\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"running\", \"RMCState\": \"active\", \"ReferenceCode\": \"\"}]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "85e1962b-590b-5cfa-9fb9-2f936d809a94",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/VirtualIOServer",
+            "responses": [
+                {
+                    "uuid": "1b24a90c-b340-57a9-a620-8fdb68be2436",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:ns2=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:ns3=\"http://www.w3.org/1999/xhtml\"><entry><id>3a1b0000-0000-4000-8000-000000000004</id><title>VirtualIOServer</title><content type=\"application/vnd.ibm.powervm.uom+xml; type=VirtualIOServer\"><VirtualIOServer:VirtualIOServer xmlns:VirtualIOServer=\"http://www.ibm.com/xmlns/systems/power/firmware/uom/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/uom/mc/2012_10/\" xmlns:ns2=\"http://www.w3.org/XML/1998/namespace/k2\" schemaVersion=\"V1_0\"><Metadata><Atom><AtomID>3a1b0000-0000-4000-8000-000000000004</AtomID></Atom></Metadata><PartitionID kb=\"ROR\" kxe=\"false\">4</PartitionID><PartitionName kb=\"ROR\" kxe=\"false\">vios1</PartitionName><PartitionState kb=\"ROR\" kxe=\"false\">running</PartitionState><PartitionType kb=\"ROR\" kxe=\"false\">Virtual IO Server</PartitionType><PartitionUUID kb=\"ROR\" kxe=\"false\">3a1b0000-0000-4000-8000-000000000004</PartitionUUID><ReferenceCode kb=\"ROR\" kxe=\"false\"></ReferenceCode><ResourceMonitoringControlState kb=\"ROR\" kxe=\"false\">active</ResourceMonitoringControlState><OperatingSystemVersion kb=\"ROR\" kxe=\"false\">VIOS 3.1.4.31</OperatingSystemVersion><PhysicalVolumes kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><Description kb=\"ROR\" kxe=\"false\">SAS Disk Drive</Description><LocationCode kb=\"ROR\" kxe=\"false\">U78D2.001.WZS0001-P1-C1-T1-L1</LocationCode><ReservePolicy kb=\"ROR\" kxe=\"false\">SinglePath</ReservePolicy><ReservePolicyAlgorithm kb=\"ROR\" kxe=\"false\">round_robin</ReservePolicyAlgorithm><UniqueDeviceID kb=\"ROR\" kxe=\"false\">VIOS1-ROOTVG</UniqueDeviceID><AvailableForUsage kb=\"ROR\" kxe=\"false\">true</AvailableForUsage><VolumeCapacity kb=\"ROR\" kxe=\"false\">51200</VolumeCapacity><VolumeName kb=\"ROR\" kxe=\"false\">hdisk0</VolumeName><VolumeState kb=\"ROR\" kxe=\"false\">active</VolumeState><VolumeUniqueID kb=\"ROR\" kxe=\"false\">VIOS1-ROOTVG</VolumeUniqueID><IsFibreChannelBacked kb=\"ROR\" kxe=\"false\">true</IsFibreChannelBacked></PhysicalVolume><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><Description kb=\"ROR\" kxe=\"false\">MPIO IBM 2145 FC Disk</Description><LocationCode kb=\"ROR\" kxe=\"false\">U78D2.001.WZS0001-P1-C1-T1-L1</LocationCode><ReservePolicy kb=\"ROR\" kxe=\"false\">NoReserve</ReservePolicy><ReservePolicyAlgorithm kb=\"ROR\" kxe=\"false\">round_robin</ReservePolicyAlgorithm><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMQ==</UniqueDeviceID><AvailableForUsage kb=\"ROR\" kxe=\"false\">true</AvailableForUsage><VolumeCapacity kb=\"ROR\" kxe=\"false\">51200</VolumeCapacity><VolumeName kb=\"ROR\" kxe=\"false\">hdisk1</VolumeName><VolumeState kb=\"ROR\" kxe=\"false\">active</VolumeState><VolumeUniqueID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMQ==</VolumeUniqueID><IsFibreChannelBacked kb=\"ROR\" kxe=\"false\">true</IsFibreChannelBacked></PhysicalVolume><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><Description kb=\"ROR\" kxe=\"false\">MPIO IBM 2145 FC Disk</Description><LocationCode kb=\"ROR\" kxe=\"false\">U78D2.001.WZS0001-P1-C1-T1-L1</LocationCode><ReservePolicy kb=\"ROR\" kxe=\"false\">NoReserve</ReservePolicy><ReservePolicyAlgorithm kb=\"ROR\" kxe=\"false\">round_robin</ReservePolicyAlgorithm><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMg==</UniqueDeviceID><AvailableForUsage kb=\"ROR\" kxe=\"false\">true</AvailableForUsage><VolumeCapacity kb=\"ROR\" kxe=\"false\">51200</VolumeCapacity><VolumeName kb=\"ROR\" kxe=\"false\">hdisk2</VolumeName><VolumeState kb=\"ROR\" kxe=\"false\">failed</VolumeState><VolumeUniqueID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMg==</VolumeUniqueID><IsFibreChannelBacked kb=\"ROR\" kxe=\"false\">true</IsFibreChannelBacked></PhysicalVolume><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><Description kb=\"ROR\" kxe=\"false\">MPIO IBM 2145 FC Disk</Description><LocationCode kb=\"ROR\" kxe=\"false\">U78D2.001.WZS0001-P1-C1-T1-L1</LocationCode><ReservePolicy kb=\"ROR\" kxe=\"false\">SinglePath</ReservePolicy><ReservePolicyAlgorithm kb=\"ROR\" kxe=\"false\">round_robin</ReservePolicyAlgorithm><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMw==</UniqueDeviceID><AvailableForUsage kb=\"ROR\" kxe=\"false\">true</AvailableForUsage><VolumeCapacity kb=\"ROR\" kxe=\"false\">51200</VolumeCapacity><VolumeName kb=\"ROR\" kxe=\"false\">hdisk3</VolumeName><VolumeState kb=\"ROR\" kxe=\"false\">active</VolumeState><VolumeUniqueID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMw==</VolumeUniqueID><IsFibreChannelBacked kb=\"ROR\" kxe=\"false\">true</IsFibreChannelBacked></PhysicalVolume></PhysicalVolumes><VirtualFibreChannelMappings kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><VirtualFibreChannelMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000001\" rel=\"related\"/><Port kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><PortName kb=\"ROR\" kxe=\"false\">fcs0</PortName><WWPN kb=\"ROR\" kxe=\"false\">10000090FA000001</WWPN></Port></VirtualFibreChannelMapping><VirtualFibreChannelMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000002\" rel=\"related\"/><Port kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><PortName kb=\"ROR\" kxe=\"false\">fcs1</PortName><WWPN kb=\"ROR\" kxe=\"false\">10000090FA000001</WWPN></Port></VirtualFibreChannelMapping></VirtualFibreChannelMappings><VirtualSCSIMappings kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><VirtualSCSIMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000001\" rel=\"related\"/><Storage kxe=\"false\" kb=\"CUR\"><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ReservePolicy kb=\"ROR\" kxe=\"false\">NoReserve</ReservePolicy><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMQ==</UniqueDeviceID><VolumeName kb=\"ROR\" kxe=\"false\">hdisk1</VolumeName></PhysicalVolume></Storage></VirtualSCSIMapping><VirtualSCSIMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000001\" rel=\"related\"/><Storage kxe=\"false\" kb=\"CUR\"><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ReservePolicy kb=\"ROR\" kxe=\"false\">NoReserve</ReservePolicy><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMg==</UniqueDeviceID><VolumeName kb=\"ROR\" kxe=\"false\">hdisk2</VolumeName></PhysicalVolume></Storage></VirtualSCSIMapping><VirtualSCSIMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000002\" rel=\"related\"/><Storage kxe=\"false\" kb=\"CUR\"><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ReservePolicy kb=\"ROR\" kxe=\"false\">SinglePath</ReservePolicy><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMw==</UniqueDeviceID><VolumeName kb=\"ROR\" kxe=\"false\">hdisk3</VolumeName></PhysicalVolume></Storage></VirtualSCSIMapping><VirtualSCSIMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000002\" rel=\"related\"/><Storage kxe=\"false\" kb=\"CUR\"><VirtualOpticalMedia schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><MediaName kb=\"ROR\" kxe=\"false\">aix73.iso</MediaName></VirtualOpticalMedia></Storage></VirtualSCSIMapping></VirtualSCSIMappings></VirtualIOServer:VirtualIOServer></content></entry><entry><id>3a1b0000-0000-4000-8000-000000000005</id><title>VirtualIOServer</title><content type=\"application/vnd.ibm.powervm.uom+xml; type=VirtualIOServer\"><VirtualIOServer:VirtualIOServer xmlns:VirtualIOServer=\"http://www.ibm.com/xmlns/systems/power/firmware/uom/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/uom/mc/2012_10/\" xmlns:ns2=\"http://www.w3.org/XML/1998/namespace/k2\" schemaVersion=\"V1_0\"><Metadata><Atom><AtomID>3a1b0000-0000-4000-8000-000000000005</AtomID></Atom></Metadata><PartitionID kb=\"ROR\" kxe=\"false\">5</PartitionID><PartitionName kb=\"ROR\" kxe=\"false\">vios2</PartitionName><PartitionState kb=\"ROR\" kxe=\"false\">running</PartitionState><PartitionType kb=\"ROR\" kxe=\"false\">Virtual IO Server</PartitionType><PartitionUUID kb=\"ROR\" kxe=\"false\">3a1b0000-0000-4000-8000-000000000005</PartitionUUID><ReferenceCode kb=\"ROR\" kxe=\"false\"></ReferenceCode><ResourceMonitoringControlState kb=\"ROR\" kxe=\"false\">inactive</ResourceMonitoringControlState><OperatingSystemVersion kb=\"ROR\" kxe=\"false\">VIOS 3.1.4.31</OperatingSystemVersion><PhysicalVolumes kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><Description kb=\"ROR\" kxe=\"false\">SAS Disk Drive</Description><LocationCode kb=\"ROR\" kxe=\"false\">U78D2.001.WZS0001-P1-C1-T1-L1</LocationCode><ReservePolicy kb=\"ROR\" kxe=\"false\">SinglePath</ReservePolicy><ReservePolicyAlgorithm kb=\"ROR\" kxe=\"false\">round_robin</ReservePolicyAlgorithm><UniqueDeviceID kb=\"ROR\" kxe=\"false\">VIOS2-ROOTVG</UniqueDeviceID><AvailableForUsage kb=\"ROR\" kxe=\"false\">true</AvailableForUsage><VolumeCapacity kb=\"ROR\" kxe=\"false\">51200</VolumeCapacity><VolumeName kb=\"ROR\" kxe=\"false\">hdisk0</VolumeName><VolumeState kb=\"ROR\" kxe=\"false\">active</VolumeState><VolumeUniqueID kb=\"ROR\" kxe=\"false\">VIOS2-ROOTVG</VolumeUniqueID><IsFibreChannelBacked kb=\"ROR\" kxe=\"false\">true</IsFibreChannelBacked></PhysicalVolume><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><Description kb=\"ROR\" kxe=\"false\">MPIO IBM 2145 FC Disk</Description><LocationCode kb=\"ROR\" kxe=\"false\">U78D2.001.WZS0001-P1-C1-T1-L1</LocationCode><ReservePolicy kb=\"ROR\" kxe=\"false\">NoReserve</ReservePolicy><ReservePolicyAlgorithm kb=\"ROR\" kxe=\"false\">round_robin</ReservePolicyAlgorithm><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMQ==</UniqueDeviceID><AvailableForUsage kb=\"ROR\" kxe=\"false\">true</AvailableForUsage><VolumeCapacity kb=\"ROR\" kxe=\"false\">51200</VolumeCapacity><VolumeName kb=\"ROR\" kxe=\"false\">hdisk4</VolumeName><VolumeState kb=\"ROR\" kxe=\"false\">active</VolumeState><VolumeUniqueID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMQ==</VolumeUniqueID><IsFibreChannelBacked kb=\"ROR\" kxe=\"false\">true</IsFibreChannelBacked></PhysicalVolume><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><Description kb=\"ROR\" kxe=\"false\">MPIO IBM 2145 FC Disk</Description><LocationCode kb=\"ROR\" kxe=\"false\">U78D2.001.WZS0001-P1-C1-T1-L1</LocationCode><ReservePolicy kb=\"ROR\" kxe=\"false\">NoReserve</ReservePolicy><ReservePolicyAlgorithm kb=\"ROR\" kxe=\"false\">round_robin</ReservePolicyAlgorithm><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMg==</UniqueDeviceID><AvailableForUsage kb=\"ROR\" kxe=\"false\">true</AvailableForUsage><VolumeCapacity kb=\"ROR\" kxe=\"false\">51200</VolumeCapacity><VolumeName kb=\"ROR\" kxe=\"false\">hdisk5</VolumeName><VolumeState kb=\"ROR\" kxe=\"false\">active</VolumeState><VolumeUniqueID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMg==</VolumeUniqueID><IsFibreChannelBacked kb=\"ROR\" kxe=\"false\">true</IsFibreChannelBacked></PhysicalVolume><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><Description kb=\"ROR\" kxe=\"false\">MPIO IBM 2145 FC Disk</Description><LocationCode kb=\"ROR\" kxe=\"false\">U78D2.001.WZS0001-P1-C1-T1-L1</LocationCode><ReservePolicy kb=\"ROR\" kxe=\"false\">SinglePath</ReservePolicy><ReservePolicyAlgorithm kb=\"ROR\" kxe=\"false\">round_robin</ReservePolicyAlgorithm><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMw==</UniqueDeviceID><AvailableForUsage kb=\"ROR\" kxe=\"false\">true</AvailableForUsage><VolumeCapacity kb=\"ROR\" kxe=\"false\">51200</VolumeCapacity><VolumeName kb=\"ROR\" kxe=\"false\">hdisk6</VolumeName><VolumeState kb=\"ROR\" kxe=\"false\">active</VolumeState><VolumeUniqueID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMw==</VolumeUniqueID><IsFibreChannelBacked kb=\"ROR\" kxe=\"false\">true</IsFibreChannelBacked></PhysicalVolume></PhysicalVolumes><VirtualFibreChannelMappings kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><VirtualFibreChannelMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000001\" rel=\"related\"/><Port kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><PortName kb=\"ROR\" kxe=\"false\">fcs0</PortName><WWPN kb=\"ROR\" kxe=\"false\">10000090FA000001</WWPN></Port></VirtualFibreChannelMapping><VirtualFibreChannelMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000002\" rel=\"related\"/></VirtualFibreChannelMapping></VirtualFibreChannelMappings><VirtualSCSIMappings kb=\"CUD\" kxe=\"false\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><VirtualSCSIMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000001\" rel=\"related\"/><Storage kxe=\"false\" kb=\"CUR\"><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ReservePolicy kb=\"ROR\" kxe=\"false\">NoReserve</ReservePolicy><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMQ==</UniqueDeviceID><VolumeName kb=\"ROR\" kxe=\"false\">hdisk4</VolumeName></PhysicalVolume></Storage></VirtualSCSIMapping><VirtualSCSIMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000001\" rel=\"related\"/><Storage kxe=\"false\" kb=\"CUR\"><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ReservePolicy kb=\"ROR\" kxe=\"false\">NoReserve</ReservePolicy><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMg==</UniqueDeviceID><VolumeName kb=\"ROR\" kxe=\"false\">hdisk5</VolumeName></PhysicalVolume></Storage></VirtualSCSIMapping><VirtualSCSIMapping schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><AssociatedLogicalPartition kb=\"CUR\" kxe=\"false\" href=\"https://hmc01:12443/rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/LogicalPartition/3a1b0000-0000-4000-8000-000000000002\" rel=\"related\"/><Storage kxe=\"false\" kb=\"CUR\"><PhysicalVolume schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ReservePolicy kb=\"ROR\" kxe=\"false\">SinglePath</ReservePolicy><UniqueDeviceID kb=\"ROR\" kxe=\"false\">01M0lCTTIxNDUxMjQ2MDA1MDc2ODAyODE4MjQ5MDAwMDAwMDAwMDAwMw==</UniqueDeviceID><VolumeName kb=\"ROR\" kxe=\"false\">hdisk6</VolumeName></PhysicalVolume></Storage></VirtualSCSIMapping></VirtualSCSIMappings></VirtualIOServer:VirtualIOServer></content></entry></feed>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "7ed4a057-ccb4-530b-97b5-684840f555a7",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000002/VirtualIOServer",
+            "responses": [
+                {
+                    "uuid": "846adc5a-0c9c-5062-8756-98007c98af08",
+                    "body": "",
+                    "latency": 0,
+                    "statusCode": 204,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "a7d0fb30-d65f-5e04-9b5f-24b446985ba5",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/pcm/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/ProcessedMetrics",
+            "responses": [
+                {
+                    "uuid": "86fd404b-2de8-5a83-ba24-47cfe9f321ab",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<feed xmlns=\"http://www.w3.org/2005/Atom\"><id>b1f2c3d4-0000-3000-8000-000000000001</id><title type=\"text\">ProcessedMetrics</title><entry><id>1</id><title type=\"text\">ManagedSystem_b1f2c3d4-0000-3000-8000-000000000001</title><link type=\"application/json\" href=\"https://hmc01:12443/rest/api/pcm/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/ProcessedMetrics/ManagedSystem_b1f2c3d4-0000-3000-8000-000000000001_20261103T120000_20261103T120000_30.json\"/></entry></feed>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "ae463bf4-b4c6-56d9-b62c-5b1599d5efee",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/pcm/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000002/ProcessedMetrics",
+            "responses": [
+                {
+                    "uuid": "555b8f0a-71c4-5fd1-88b3-fa5fa0bd0e57",
+                    "body": "",
+                    "latency": 0,
+                    "statusCode": 204,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "0736e6ab-4893-5315-b2ba-08c71b75a5fb",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/pcm/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/ProcessedMetrics/ManagedSystem_b1f2c3d4-0000-3000-8000-000000000001_20261103T120000_20261103T120000_30.json",
+            "responses": [
+                {
+                    "uuid": "dcad7985-3a52-55c1-b435-055f9f0485e9",
+                    "body": "{\"systemUtil\": {\"utilInfo\": {\"version\": \"1.3.0\", \"metricType\": \"Processed\", \"frequency\": 30, \"name\": \"Server-9009-42A-SN7860001\"}, \"utilSamples\": [{\"sampleInfo\": {\"timeStamp\": \"2026-11-03T12:00:00+0100\", \"status\": 0}, \"serverUtil\": {\"processor\": {\"totalProcUnits\": [32.0], \"utilizedProcUnits\": [21.5], \"availableProcUnits\": [4.25], \"configurableProcUnits\": [32.0]}, \"memory\": {\"totalMem\": [1048576.0], \"availableMem\": [131072.0], \"configurableMem\": [1048576.0], \"assignedMemToLpars\": [917504.0]}, \"sharedProcessorPool\": [{\"id\": 0, \"name\": \"DefaultPool\", \"assignedProcUnits\": [16.0], \"utilizedProcUnits\": [6.4], \"availableProcUnits\": [9.6], \"configuredProcUnits\": [16.0]}, {\"id\": 1, \"name\": \"OraclePool\", \"assignedProcUnits\": [8.0], \"utilizedProcUnits\": [7.6], \"availableProcUnits\": [0.4], \"configuredProcUnits\": [8.0]}]}}]}}",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "ca7496fa-8065-54cb-bedd-b985a172743c",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/ManagementConsole",
+            "responses": [
+                {
+                    "uuid": "1a1c4699-4f64-509e-8d7d-9c66024497a9",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:ns2=\"http://a9.com/-/spec/opensearch/1.1/\" xmlns:ns3=\"http://www.w3.org/1999/xhtml\"><entry><id>c5d6e7f8-0000-3000-8000-0000000000aa</id><title>ManagementConsole</title><content type=\"application/vnd.ibm.powervm.uom+xml; type=ManagementConsole\"><ManagementConsole:ManagementConsole xmlns:ManagementConsole=\"http://www.ibm.com/xmlns/systems/power/firmware/uom/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/uom/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom><AtomID>c5d6e7f8-0000-3000-8000-0000000000aa</AtomID></Atom></Metadata><ManagementConsoleName kb=\"ROR\" kxe=\"false\">hmc01</ManagementConsoleName></ManagementConsole:ManagementConsole></content></entry></feed>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "1b3a1a58-675f-5fc9-91eb-4c83ce5790b5",
+            "type": "http",
+            "documentation": "",
+            "method": "put",
+            "endpoint": "rest/api/uom/ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner",
+            "responses": [
+                {
+                    "uuid": "d32ddce0-23d0-5e32-a036-d3027ddac3b4",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600001</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600001</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">NOT_STARTED</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata></Results></JobResponse:JobResponse></content></entry>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "",
+                            "value": "vios1",
+                            "invert": false,
+                            "operator": "regex"
+                        }
+                    ],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "8666bd8b-7e00-5f7e-b9a5-3bc0908e778a",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600002</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600002</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">NOT_STARTED</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata></Results></JobResponse:JobResponse></content></entry>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "",
+                            "value": "vios2",
+                            "invert": false,
+                            "operator": "regex"
+                        }
+                    ],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "1b027bb3-ce1b-5bba-b6f8-2d2adfce4b32",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/jobs/1762167600001",
+            "responses": [
+                {
+                    "uuid": "8fb53d1f-6424-5961-b1d7-adaf5685661c",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600001</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600001</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">COMPLETED_OK</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><JobParameter schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ParameterName kb=\"ROR\" kxe=\"false\">returnCode</ParameterName><ParameterValue kb=\"ROR\" kxe=\"false\">0</ParameterValue></JobParameter><JobParameter schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ParameterName kb=\"ROR\" kxe=\"false\">result</ParameterName><ParameterValue kb=\"ROR\" kxe=\"false\">IDENTIFIER TIMESTAMP  T C RESOURCE_NAME  DESCRIPTION\nDE3B8540   1103104526 P H hdisk2         PATH HAS FAILED\nB6267342   1102221026 P H fcs0           ADAPTER ERROR\n4B436A3D   1103091526 T H fscsi1         LINK ERROR\nA6DF45AA   1103090026 I O RMCdaemon      The daemon is started.\nEAA3D429   0915083026 P S SYSPROC        SOFTWARE PROGRAM ABNORMALLY TERMINATED</ParameterValue></JobParameter></Results></JobResponse:JobResponse></content></entry>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "03bc0d37-7d7e-5029-9496-630ed9d2347c",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/jobs/1762167600002",
+            "responses": [
+                {
+                    "uuid": "f89fa1d2-af40-5762-87d1-5e8ed9ef6fff",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600002</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600002</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">COMPLETED_OK</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><JobParameter schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ParameterName kb=\"ROR\" kxe=\"false\">returnCode</ParameterName><ParameterValue kb=\"ROR\" kxe=\"false\">0</ParameterValue></JobParameter><JobParameter schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ParameterName kb=\"ROR\" kxe=\"false\">result</ParameterName><ParameterValue kb=\"ROR\" kxe=\"false\">IDENTIFIER TIMESTAMP  T C RESOURCE_NAME  DESCRIPTION\nA6DF45AA   1103090026 I O RMCdaemon      The daemon is started.</ParameterValue></JobParameter></Results></JobResponse:JobResponse></content></entry>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        }
+    ]
+}
