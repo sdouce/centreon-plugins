@@ -39,7 +39,7 @@ Lpars ${tc}
     ...    --
     ...    1
     ...    ${EMPTY}
-    ...    CRITICAL: partition 'lnx01' [system: Server-9009-42A-SN7860001] state: error | 'lpars.detected.count'=6;;;0; 'lpars.running.count'=4;;;0;6
+    ...    CRITICAL: partition 'lnx01' [system: Server-9009-42A-SN7860001] state: error | 'lpars.detected.count'=4;;;0; 'lpars.running.count'=2;;;0;4
     ...    2
     ...    --include-lpar-name=aix
     ...    OK: Number of partitions detected: 2, running: 1 - All partitions are ok | 'lpars.detected.count'=2;;;0; 'lpars.running.count'=1;;;0;2

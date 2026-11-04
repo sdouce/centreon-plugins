@@ -255,6 +255,7 @@ sub request {
     return undef if $self->{http}->get_code() == 204;
 
     if ($self->{http}->get_code() < 200 || $self->{http}->get_code() >= 300) {
+        return undef if $options{ignore_error};
         $self->{output}->option_exit(
             short_msg => sprintf(
                 "API request '%s' failed [code: '%s'] [message: '%s']",
@@ -273,6 +274,7 @@ sub request_json {
     return undef if is_empty($content);
 
     my $decoded = json_decode($content, output => $self->{output}, no_exit => 1);
+    return undef if !defined($decoded) && $options{ignore_error};
     $self->{output}->option_exit(short_msg => MSG_JSON_DECODE_ERROR)
         unless defined($decoded);
     return $decoded;
@@ -335,6 +337,35 @@ sub get_lpars {
     }
 
     return $lpars;
+}
+
+# Light list of the VIOS of a managed system (name, state, RMC state).
+# VIOS are not part of the LogicalPartition collection: the VirtualIOServer quick view is used
+# when the HMC supports it, otherwise the full VirtualIOServer feed.
+sub get_vios_list {
+    my ($self, %options) = @_;
+
+    my $data = $self->request_json(
+        path => '/rest/api/uom/ManagedSystem/' . $options{system_uuid} . '/VirtualIOServer/quick/All',
+        ignore_error => 1
+    );
+    if (ref($data) eq 'ARRAY' && !grep { !defined($_->{PartitionName}) || !defined($_->{PartitionState}) } @$data) {
+        return [
+            map {
+                {
+                    uuid => $_->{UUID},
+                    name => $_->{PartitionName},
+                    state => $_->{PartitionState},
+                    rmc_state => defined($_->{RMCState}) ? $_->{RMCState} :
+                        defined($_->{ResourceMonitoringControlState}) ? $_->{ResourceMonitoringControlState} : ''
+                }
+            } @$data
+        ];
+    }
+    # 204 (no VIOS) is a valid answer of the quick view
+    return [] if !defined($data) && $self->{http}->get_code() == 204;
+
+    return $self->get_vios(system_uuid => $options{system_uuid});
 }
 
 sub uuid_from_href {

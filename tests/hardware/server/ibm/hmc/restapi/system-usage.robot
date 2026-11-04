@@ -45,4 +45,4 @@ System-usage ${tc}
     ...    CRITICAL: managed system 'Server-9009-42A-SN7860001' cpu usage: 67.19 %, memory total: 1.00 TB assigned to partitions: 896.00 GB (87.50%) available: 128.00 GB (12.50%) | 'Server-9009-42A-SN7860001#system.cpu.utilization.percentage'=67.19%;0:60;;0;100 'Server-9009-42A-SN7860001#system.cpu.utilized.count'=21.500;;;0;32 'Server-9009-42A-SN7860001#system.memory.assigned.bytes'=962072674304B;;;0;1099511627776 'Server-9009-42A-SN7860001#system.memory.assigned.percentage'=87.50%;;0:80;0;100
     ...    3
     ...    --exclude-system-name=9009
-    ...    UNKNOWN: No performance data found (check that PCM data collection is enabled on the managed systems). 
+    ...    UNKNOWN: No performance data found (check that PCM data collection is enabled on the managed systems).
