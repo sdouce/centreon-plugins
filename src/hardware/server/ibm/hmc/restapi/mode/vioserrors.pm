@@ -107,14 +107,13 @@ sub manage_selection {
     my $since = $self->{option_results}->{retention} > 0 ? time() - $self->{option_results}->{retention} : 0;
     $self->{vios} = {};
 
-    # 1. find running VIOS with the light LPAR quick view, then submit all CLIRunner jobs at once
+    # 1. find running VIOS (light quick view when available), then submit all CLIRunner jobs at once
     my @jobs;
     foreach my $system (@{$options{custom}->get_managed_systems()}) {
         next if is_excluded($system->{name}, $self->{option_results}->{include_system_name}, $self->{option_results}->{exclude_system_name}, output => $self->{output});
         next if $system->{state} !~ /^operating$/i;
 
-        foreach my $vios (@{$options{custom}->get_lpars(system_uuid => $system->{uuid})}) {
-            next if !defined($vios->{type}) || $vios->{type} !~ /Virtual\s*IO\s*Server/i;
+        foreach my $vios (@{$options{custom}->get_vios_list(system_uuid => $system->{uuid})}) {
             next if is_excluded($vios->{name}, $self->{option_results}->{include_vios_name}, $self->{option_results}->{exclude_vios_name}, output => $self->{output});
             if ($vios->{state} !~ /^running$/i) {
                 $self->{output}->output_add(long_msg => "skipping VIOS '$vios->{name}': not running", debug => 1);

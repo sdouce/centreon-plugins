@@ -48,4 +48,4 @@ Vios ${tc}
     ...    CRITICAL: managed system 'Server-9009-42A-SN7860001' VIOS running: 1 | 'Server-9009-42A-SN7860001#vios.running.count'=1;;2:;0;1
     ...    4
     ...    --exclude-system-name=9009
-    ...    UNKNOWN: No VIOS found. 
+    ...    UNKNOWN: No VIOS found.

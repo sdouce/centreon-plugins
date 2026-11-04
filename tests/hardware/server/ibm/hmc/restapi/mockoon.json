@@ -34,6 +34,14 @@
         },
         {
             "type": "route",
+            "uuid": "ae702eb2-21f5-511a-b9fa-70bbeb4c7fc5"
+        },
+        {
+            "type": "route",
+            "uuid": "50456db3-3263-545b-8223-79c3256d39c5"
+        },
+        {
+            "type": "route",
             "uuid": "a7d0fb30-d65f-5e04-9b5f-24b446985ba5"
         },
         {
@@ -171,7 +179,7 @@
             "responses": [
                 {
                     "uuid": "f3817f63-4247-5bcf-9a40-cd9212fc3a56",
-                    "body": "[{\"UUID\": \"3a1b0000-0000-4000-8000-000000000001\", \"PartitionID\": 3, \"PartitionName\": \"aix01\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"running\", \"RMCState\": \"active\", \"ReferenceCode\": \"\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000002\", \"PartitionID\": 4, \"PartitionName\": \"aix02\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"not activated\", \"RMCState\": \"inactive\", \"ReferenceCode\": \"00000000\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000003\", \"PartitionID\": 5, \"PartitionName\": \"lnx01\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"error\", \"RMCState\": \"inactive\", \"ReferenceCode\": \"B2001230\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000004\", \"PartitionID\": 1, \"PartitionName\": \"vios1\", \"PartitionType\": \"Virtual IO Server\", \"PartitionState\": \"running\", \"RMCState\": \"active\", \"ReferenceCode\": \"\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000005\", \"PartitionID\": 2, \"PartitionName\": \"vios2\", \"PartitionType\": \"Virtual IO Server\", \"PartitionState\": \"running\", \"RMCState\": \"inactive\", \"ReferenceCode\": \"\"}]",
+                    "body": "[{\"UUID\": \"3a1b0000-0000-4000-8000-000000000001\", \"PartitionID\": 3, \"PartitionName\": \"aix01\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"running\", \"RMCState\": \"active\", \"ReferenceCode\": \"\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000002\", \"PartitionID\": 4, \"PartitionName\": \"aix02\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"not activated\", \"RMCState\": \"inactive\", \"ReferenceCode\": \"00000000\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000003\", \"PartitionID\": 5, \"PartitionName\": \"lnx01\", \"PartitionType\": \"AIX/Linux\", \"PartitionState\": \"error\", \"RMCState\": \"inactive\", \"ReferenceCode\": \"B2001230\"}]",
                     "latency": 0,
                     "statusCode": 200,
                     "label": "",
@@ -287,6 +295,78 @@
                         {
                             "key": "Content-Type",
                             "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "ae702eb2-21f5-511a-b9fa-70bbeb4c7fc5",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000001/VirtualIOServer/quick/All",
+            "responses": [
+                {
+                    "uuid": "48180688-7ada-5ebc-804e-3088d5c93c84",
+                    "body": "[{\"UUID\": \"3a1b0000-0000-4000-8000-000000000004\", \"PartitionID\": 1, \"PartitionName\": \"vios1\", \"PartitionType\": \"Virtual IO Server\", \"PartitionState\": \"running\", \"RMCState\": \"active\"}, {\"UUID\": \"3a1b0000-0000-4000-8000-000000000005\", \"PartitionID\": 2, \"PartitionName\": \"vios2\", \"PartitionType\": \"Virtual IO Server\", \"PartitionState\": \"running\", \"RMCState\": \"inactive\"}]",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "50456db3-3263-545b-8223-79c3256d39c5",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/ManagedSystem/b1f2c3d4-0000-3000-8000-000000000002/VirtualIOServer/quick/All",
+            "responses": [
+                {
+                    "uuid": "ea6888f9-47a3-55cd-836f-5ee29627d67f",
+                    "body": "",
+                    "latency": 0,
+                    "statusCode": 204,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
                         }
                     ],
                     "bodyType": "INLINE",
