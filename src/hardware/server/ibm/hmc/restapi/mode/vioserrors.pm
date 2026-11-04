@@ -107,10 +107,14 @@ sub manage_selection {
     my $since = $self->{option_results}->{retention} > 0 ? time() - $self->{option_results}->{retention} : 0;
     $self->{vios} = {};
 
+    # 1. find running VIOS with the light LPAR quick view, then submit all CLIRunner jobs at once
+    my @jobs;
     foreach my $system (@{$options{custom}->get_managed_systems()}) {
         next if is_excluded($system->{name}, $self->{option_results}->{include_system_name}, $self->{option_results}->{exclude_system_name}, output => $self->{output});
+        next if $system->{state} !~ /^operating$/i;
 
-        foreach my $vios (@{$options{custom}->get_vios(system_uuid => $system->{uuid})}) {
+        foreach my $vios (@{$options{custom}->get_lpars(system_uuid => $system->{uuid})}) {
+            next if !defined($vios->{type}) || $vios->{type} !~ /Virtual\s*IO\s*Server/i;
             next if is_excluded($vios->{name}, $self->{option_results}->{include_vios_name}, $self->{option_results}->{exclude_vios_name}, output => $self->{output});
             if ($vios->{state} !~ /^running$/i) {
                 $self->{output}->output_add(long_msg => "skipping VIOS '$vios->{name}': not running", debug => 1);
@@ -118,44 +122,55 @@ sub manage_selection {
             }
 
             # the VIOS error log is read through the HMC CLI (viosvrcmd) run by the CLIRunner REST job
-            my $result = $options{custom}->run_cli(
+            my $job_id = $options{custom}->submit_cli_job(
                 command => sprintf('viosvrcmd -m "%s" -p "%s" -c "errlog"', $system->{name}, $vios->{name})
             );
-            my $instance = $system->{name} . '~' . $vios->{name};
-            my @lines = split(/\n/, defined($result->{output}) ? $result->{output} : '');
-            $self->{vios}->{$instance} = {
-                name => $vios->{name},
-                system => $system->{name},
-                status => $result->{status},
-                returnCode => $result->{rc},
-                message => @lines ? $lines[-1] : '',
-                count => 0,
-                last => ''
-            };
-            next if $result->{status} ne 'COMPLETED_OK' || $result->{rc} !~ /^0?$/;
+            push @jobs, { system => $system->{name}, vios => $vios->{name}, job_id => $job_id };
+        }
+    }
 
-            # errlog summary line: IDENTIFIER TIMESTAMP(MMDDhhmmYY) T C RESOURCE_NAME DESCRIPTION
-            my $last_time = 0;
-            foreach my $line (@lines) {
-                next if $line !~ /^\s*([0-9A-Fa-f]{8})\s+(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s+(\S)\s+(\S)\s+(\S+)\s+(.*?)\s*$/;
-                my ($identifier, $month, $day, $hour, $min, $year, $type, $class, $resource, $description) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+    # 2. wait for all jobs (they run in parallel on the HMC)
+    my $results = $options{custom}->wait_cli_jobs(job_ids => [ grep { defined($_) && $_ ne '' } map { $_->{job_id} } @jobs ]);
 
-                next if $self->{option_results}->{error_type} ne '' && $type !~ /^[$self->{option_results}->{error_type}]$/i;
-                next if $self->{option_results}->{error_class} ne '' && $class !~ /^[$self->{option_results}->{error_class}]$/i;
-                next if $self->{option_results}->{exclude_error} ne '' && $line =~ /$self->{option_results}->{exclude_error}/;
+    # 3. parse each VIOS error log
+    foreach my $job (@jobs) {
+        my $result = defined($job->{job_id}) && defined($results->{ $job->{job_id} }) ? $results->{ $job->{job_id} } :
+            { status => 'FAILED', rc => '', output => 'cannot find JobID in CLIRunner response' };
+        my ($system_name, $vios_name) = ($job->{system}, $job->{vios});
+        my $instance = $system_name . '~' . $vios_name;
+        my @lines = split(/\n/, defined($result->{output}) ? $result->{output} : '');
+        $self->{vios}->{$instance} = {
+            name => $vios_name,
+            system => $system_name,
+            status => $result->{status},
+            returnCode => $result->{rc},
+            message => @lines ? $lines[-1] : '',
+            count => 0,
+            last => ''
+        };
+        next if $result->{status} ne 'COMPLETED_OK' || $result->{rc} !~ /^0?$/;
 
-                my $timestamp = eval { timelocal(0, $min, $hour, $day, $month - 1, 2000 + $year) };
-                next if $since > 0 && defined($timestamp) && $timestamp < $since;
+        # errlog summary line: IDENTIFIER TIMESTAMP(MMDDhhmmYY) T C RESOURCE_NAME DESCRIPTION
+        my $last_time = 0;
+        foreach my $line (@lines) {
+            next if $line !~ /^\s*([0-9A-Fa-f]{8})\s+(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})\s+(\S)\s+(\S)\s+(\S+)\s+(.*?)\s*$/;
+            my ($identifier, $month, $day, $hour, $min, $year, $type, $class, $resource, $description) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
 
-                my $date = defined($timestamp) ? strftime('%Y-%m-%d %H:%M', localtime($timestamp)) : "$month/$day/$year $hour:$min";
-                $self->{output}->output_add(
-                    long_msg => sprintf("    VIOS '%s' [system: %s] %s %s %s/%s %s: %s", $vios->{name}, $system->{name}, $date, $identifier, $type, $class, $resource, $description)
-                );
-                $self->{vios}->{$instance}->{count}++;
-                if (defined($timestamp) && $timestamp >= $last_time) {
-                    $last_time = $timestamp;
-                    $self->{vios}->{$instance}->{last} = "$date $resource $description";
-                }
+            next if $self->{option_results}->{error_type} ne '' && $type !~ /^[$self->{option_results}->{error_type}]$/i;
+            next if $self->{option_results}->{error_class} ne '' && $class !~ /^[$self->{option_results}->{error_class}]$/i;
+            next if $self->{option_results}->{exclude_error} ne '' && $line =~ /$self->{option_results}->{exclude_error}/;
+
+            my $timestamp = eval { timelocal(0, $min, $hour, $day, $month - 1, 2000 + $year) };
+            next if $since > 0 && defined($timestamp) && $timestamp < $since;
+
+            my $date = defined($timestamp) ? strftime('%Y-%m-%d %H:%M', localtime($timestamp)) : "$month/$day/$year $hour:$min";
+            $self->{output}->output_add(
+                long_msg => sprintf("    VIOS '%s' [system: %s] %s %s %s/%s %s: %s", $vios_name, $system_name, $date, $identifier, $type, $class, $resource, $description)
+            );
+            $self->{vios}->{$instance}->{count}++;
+            if (defined($timestamp) && $timestamp >= $last_time) {
+                $last_time = $timestamp;
+                $self->{vios}->{$instance}->{last} = "$date $resource $description";
             }
         }
     }
@@ -172,7 +187,8 @@ __END__
 
 Check Virtual I/O Servers (VIOS) error log (C<errlog>), by default only permanent hardware errors.
 
-The error log is read through the HMC CLI command C<viosvrcmd>, run by the C<CLIRunner> job of the HMC REST API:
+The error log is read through the HMC CLI command C<viosvrcmd>, run by the C<CLIRunner> job of the HMC REST API
+(one job per VIOS, all jobs run in parallel on the HMC):
 the HMC user needs the permission to run C<viosvrcmd> (C<hmcviewer> role is not enough) and the VIOS RMC connection must be active.
 
 =over 8
