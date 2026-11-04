@@ -442,8 +442,8 @@ sub get_management_console_uuid {
     return $self->{mc_uuid};
 }
 
-# Run an HMC CLI command with the CLIRunner job of the REST API.
-sub run_cli {
+# Submit an HMC CLI command to the CLIRunner job of the REST API. Returns the job ID.
+sub submit_cli_job {
     my ($self, %options) = @_;
 
     my $body = sprintf(
@@ -470,34 +470,60 @@ sub run_cli {
     );
     my $doc = $self->parse_xml(content => $content);
     my ($job_id) = map { $_->textContent() } $doc->findnodes('//*[local-name()="JobID"]');
-    return { status => 'FAILED', rc => '', output => 'cannot find JobID in CLIRunner response' }
-        if is_empty($job_id);
+    return $job_id;
+}
 
-    my $deadline = time() + $self->{job_timeout};
-    my $status = '';
-    while (1) {
-        $content = $self->request(path => '/rest/api/uom/jobs/' . $job_id, accept => 'application/atom+xml');
-        $doc = $self->parse_xml(content => $content);
-        ($status) = map { $_->textContent() } $doc->findnodes('//*[local-name()="Status"]');
-        $status = '' unless defined($status);
-        last if $status !~ /^(?:NOT_STARTED|RUNNING|)$/;
-        return { status => 'TIMEOUT', rc => '', output => "job $job_id still running after $self->{job_timeout}s" }
-            if time() > $deadline;
-        sleep(2);
-    }
+# Wait for several CLIRunner jobs running in parallel on the HMC.
+# Returns { job_id => { status, rc, output } }.
+sub wait_cli_jobs {
+    my ($self, %options) = @_;
 
     my $results = {};
-    foreach my $param ($doc->findnodes('//*[local-name()="Results"]/*[local-name()="JobParameter"]')) {
-        $results->{ xtext($param, 'ParameterName', '') } = xtext($param, 'ParameterValue', '');
-    }
-    my $output = defined($results->{result}) ? $results->{result} :
-        join("\n", map { $results->{$_} } grep { $_ !~ /^(?:returnCode|rc)$/ } sort keys %$results);
+    my %pending = map { $_ => 1 } @{$options{job_ids}};
+    my $deadline = time() + $self->{job_timeout};
+    my $interval = 0.5;
+    while (%pending) {
+        foreach my $job_id (sort keys %pending) {
+            my $content = $self->request(path => '/rest/api/uom/jobs/' . $job_id, accept => 'application/atom+xml');
+            my $doc = $self->parse_xml(content => $content);
+            my ($status) = map { $_->textContent() } $doc->findnodes('//*[local-name()="Status"]');
+            $status = '' unless defined($status);
+            next if $status =~ /^(?:NOT_STARTED|RUNNING|)$/;
 
-    return {
-        status => $status,
-        rc => defined($results->{returnCode}) ? $results->{returnCode} : '',
-        output => $output
-    };
+            my $params = {};
+            foreach my $param ($doc->findnodes('//*[local-name()="Results"]/*[local-name()="JobParameter"]')) {
+                $params->{ xtext($param, 'ParameterName', '') } = xtext($param, 'ParameterValue', '');
+            }
+            $results->{$job_id} = {
+                status => $status,
+                rc => defined($params->{returnCode}) ? $params->{returnCode} : '',
+                output => defined($params->{result}) ? $params->{result} :
+                    join("\n", map { $params->{$_} } grep { $_ !~ /^(?:returnCode|rc)$/ } sort keys %$params)
+            };
+            delete $pending{$job_id};
+        }
+        last if !%pending;
+
+        if (time() > $deadline) {
+            $results->{$_} = { status => 'TIMEOUT', rc => '', output => "job $_ still running after $self->{job_timeout}s" }
+                foreach keys %pending;
+            last;
+        }
+        sleep($interval);
+        $interval = 2 if ($interval *= 2) > 2;
+    }
+
+    return $results;
+}
+
+# Run one HMC CLI command with the CLIRunner job of the REST API.
+sub run_cli {
+    my ($self, %options) = @_;
+
+    my $job_id = $self->submit_cli_job(command => $options{command});
+    return { status => 'FAILED', rc => '', output => 'cannot find JobID in CLIRunner response' }
+        if is_empty($job_id);
+    return $self->wait_cli_jobs(job_ids => [ $job_id ])->{$job_id};
 }
 
 1;
