@@ -61,6 +61,17 @@ sub set_counters {
     ];
 
     $self->{maps_counters}->{global} = [
+        {
+            label => 'system-status',
+            type => COUNTER_KIND_TEXT,
+            critical_default => '%{state} !~ /^operating$/i',
+            set => {
+                key_values => [ { name => 'state' }, { name => 'name' } ],
+                output_template => 'state: %s',
+                closure_custom_perfdata => sub { return 0; },
+                closure_custom_threshold_check => \&catalog_status_threshold_ng
+            }
+        },
         { label => 'vios-running', nlabel => 'vios.running.count', critical_default => '2:', set => {
                 key_values => [ { name => 'running' }, { name => 'detected' } ],
                 output_template => 'VIOS running: %s',
@@ -119,9 +130,19 @@ sub manage_selection {
     foreach my $system (@{$options{custom}->get_managed_systems()}) {
         next if is_excluded($system->{name}, $self->{option_results}->{include_system_name}, $self->{option_results}->{exclude_system_name}, output => $self->{output});
 
-        my $entry = { name => $system->{name}, global => { detected => 0, running => 0 }, vios => {} };
+        # VIOS cannot run (and RMC cannot be active) while the managed system is not operating (power off, standby...):
+        # in that case only the managed system state is checked (see --critical-system-status)
+        my $operating = $system->{state} =~ /^operating$/i ? 1 : 0;
+        my $entry = {
+            name => $system->{name},
+            global => { name => $system->{name}, state => $system->{state}, detected => 0, running => 0 },
+            vios => {}
+        };
         foreach my $vios (@{$options{custom}->get_vios(system_uuid => $system->{uuid})}) {
             next if is_excluded($vios->{name}, $self->{option_results}->{include_vios_name}, $self->{option_results}->{exclude_vios_name}, output => $self->{output});
+
+            $entry->{global}->{detected}++;
+            next if !$operating;
 
             $entry->{vios}->{ $vios->{name} } = {
                 name => $vios->{name},
@@ -131,12 +152,15 @@ sub manage_selection {
                 referenceCode => $vios->{reference_code},
                 osVersion => $vios->{os_version}
             };
-            $entry->{global}->{detected}++;
             $entry->{global}->{running}++ if $vios->{state} =~ /^running$/i;
         }
 
         # managed systems without VIOS are not monitored
         next if $entry->{global}->{detected} == 0;
+        if (!$operating) {
+            # no VIOS count check: the counter is skipped when the values are not set
+            delete $entry->{global}->{$_} foreach ('detected', 'running');
+        }
         $self->{systems}->{ $system->{name} } = $entry;
     }
 
@@ -151,6 +175,11 @@ __END__
 =head1 MODE
 
 Check Virtual I/O Servers (VIOS) state, RMC connection and number of running VIOS per managed system.
+
+VIOS are only checked on operating managed systems. When a managed system is not operating (power off, standby, error...),
+only its state is checked with C<--critical-system-status>: by default it is CRITICAL.
+To accept a powered off managed system (OK), use C<--critical-system-status='%{state} !~ /^(?:operating|power off)$/i'>
+(or C<--critical-system-status=''> to accept any state).
 
 =over 8
 
@@ -169,6 +198,21 @@ Filter VIOS by name (can be a regexp).
 =item B<--exclude-vios-name>
 
 Exclude VIOS by name (can be a regexp).
+
+=item B<--unknown-system-status>
+
+Define the conditions to match for the status to be UNKNOWN.
+You can use the following variables: C<%{state}>, C<%{name}>
+
+=item B<--warning-system-status>
+
+Define the conditions to match for the status to be WARNING.
+You can use the following variables: C<%{state}>, C<%{name}>
+
+=item B<--critical-system-status>
+
+Define the conditions to match for the status to be CRITICAL (default: C<%{state} !~ /^operating$/i>).
+You can use the following variables: C<%{state}>, C<%{name}>
 
 =item B<--warning-vios-running>
 
