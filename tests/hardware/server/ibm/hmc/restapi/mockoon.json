@@ -62,6 +62,14 @@
         },
         {
             "type": "route",
+            "uuid": "178fc9b4-f933-526b-8b69-fd8a4f78d04d"
+        },
+        {
+            "type": "route",
+            "uuid": "af9e231c-571e-5954-a2b3-460db3d279c8"
+        },
+        {
+            "type": "route",
             "uuid": "1b027bb3-ce1b-5bba-b6f8-2d2adfce4b32"
         },
         {
@@ -538,7 +546,7 @@
             "endpoint": "rest/api/uom/ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner",
             "responses": [
                 {
-                    "uuid": "d32ddce0-23d0-5e32-a036-d3027ddac3b4",
+                    "uuid": "44c88107-c496-5168-b931-66454fa8a3e6",
                     "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600001</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600001</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">NOT_STARTED</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata></Results></JobResponse:JobResponse></content></entry>",
                     "latency": 0,
                     "statusCode": 200,
@@ -557,7 +565,7 @@
                         {
                             "target": "body",
                             "modifier": "",
-                            "value": "vios1",
+                            "value": "vios1.*errlog",
                             "invert": false,
                             "operator": "regex"
                         }
@@ -570,7 +578,7 @@
                     "callbacks": []
                 },
                 {
-                    "uuid": "8666bd8b-7e00-5f7e-b9a5-3bc0908e778a",
+                    "uuid": "2564cd94-9268-5740-90d6-07770f2a69c6",
                     "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600002</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600002</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">NOT_STARTED</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata></Results></JobResponse:JobResponse></content></entry>",
                     "latency": 0,
                     "statusCode": 200,
@@ -589,7 +597,7 @@
                         {
                             "target": "body",
                             "modifier": "",
-                            "value": "vios2",
+                            "value": "vios2.*errlog",
                             "invert": false,
                             "operator": "regex"
                         }
@@ -598,6 +606,142 @@
                     "disableTemplating": true,
                     "fallbackTo404": false,
                     "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "3481d493-fc74-5291-82af-7231e4b314f7",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600003</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600003</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">NOT_STARTED</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata></Results></JobResponse:JobResponse></content></entry>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "",
+                            "value": "vios1.*lsdev",
+                            "invert": false,
+                            "operator": "regex"
+                        }
+                    ],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                },
+                {
+                    "uuid": "12468ebc-a97a-5932-b27a-7b0675764bb3",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600004</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600004</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">NOT_STARTED</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata></Results></JobResponse:JobResponse></content></entry>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [
+                        {
+                            "target": "body",
+                            "modifier": "",
+                            "value": "vios2.*lsdev",
+                            "invert": false,
+                            "operator": "regex"
+                        }
+                    ],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": false,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "178fc9b4-f933-526b-8b69-fd8a4f78d04d",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/jobs/1762167600003",
+            "responses": [
+                {
+                    "uuid": "6928d881-b61d-5439-aa84-82b8798c20ec",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600003</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600003</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">COMPLETED_OK</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><JobParameter schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ParameterName kb=\"ROR\" kxe=\"false\">returnCode</ParameterName><ParameterValue kb=\"ROR\" kxe=\"false\">0</ParameterValue></JobParameter><JobParameter schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ParameterName kb=\"ROR\" kxe=\"false\">result</ParameterName><ParameterValue kb=\"ROR\" kxe=\"false\">name             status      description\nent0             Available   PCIe2 4-Port Adapter (10GbE SFP+) (e4148a1614109304)\nfcs0             Available   PCIe3 2-Port 16Gb FC Adapter (df1000e21410f103)\nhdisk0           Available   SAS RAID 10 Disk Array\nhdisk1           Available   MPIO IBM 2145 FC Disk\npdisk0           Available   Physical SAS Disk Drive\npdisk1           Defined     Physical SAS Disk Drive\nsissas0          Available   PCIe3 x8 SAS RAID Internal Adapter 6Gb</ParameterValue></JobParameter></Results></JobResponse:JobResponse></content></entry>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
+                    "crudKey": "id",
+                    "callbacks": []
+                }
+            ],
+            "responseMode": null,
+            "streamingMode": null,
+            "streamingInterval": 0
+        },
+        {
+            "uuid": "af9e231c-571e-5954-a2b3-460db3d279c8",
+            "type": "http",
+            "documentation": "",
+            "method": "get",
+            "endpoint": "rest/api/uom/jobs/1762167600004",
+            "responses": [
+                {
+                    "uuid": "e61fde16-c01e-5ae6-ab7f-3252e85c52ac",
+                    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<entry xmlns=\"http://www.w3.org/2005/Atom\"><id>1762167600004</id><title>JobResponse</title><content type=\"application/vnd.ibm.powervm.web+xml; type=JobResponse\"><JobResponse:JobResponse xmlns:JobResponse=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" xmlns=\"http://www.ibm.com/xmlns/systems/power/firmware/web/mc/2012_10/\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><RequestURL kb=\"ROR\" kxe=\"false\">ManagementConsole/c5d6e7f8-0000-3000-8000-0000000000aa/do/CLIRunner</RequestURL><TargetUuid kb=\"ROR\" kxe=\"false\">c5d6e7f8-0000-3000-8000-0000000000aa</TargetUuid><JobID kb=\"ROR\" kxe=\"false\">1762167600004</JobID><TimeStarted kb=\"ROR\" kxe=\"false\">1762167600000</TimeStarted><Status kb=\"ROR\" kxe=\"false\">COMPLETED_OK</Status><Results kxe=\"false\" kb=\"ROO\" schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><JobParameter schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ParameterName kb=\"ROR\" kxe=\"false\">returnCode</ParameterName><ParameterValue kb=\"ROR\" kxe=\"false\">0</ParameterValue></JobParameter><JobParameter schemaVersion=\"V1_0\"><Metadata><Atom/></Metadata><ParameterName kb=\"ROR\" kxe=\"false\">result</ParameterName><ParameterValue kb=\"ROR\" kxe=\"false\">name             status      description\nent0             Available   PCIe2 4-Port Adapter (10GbE SFP+) (e4148a1614109304)\nfcs0             Available   PCIe3 2-Port 16Gb FC Adapter (df1000e21410f103)\nhdisk0           Available   MPIO IBM 2145 FC Disk</ParameterValue></JobParameter></Results></JobResponse:JobResponse></content></entry>",
+                    "latency": 0,
+                    "statusCode": 200,
+                    "label": "",
+                    "headers": [
+                        {
+                            "key": "Content-Type",
+                            "value": "application/atom+xml"
+                        }
+                    ],
+                    "bodyType": "INLINE",
+                    "filePath": "",
+                    "databucketID": "",
+                    "sendFileAsBody": false,
+                    "rules": [],
+                    "rulesOperator": "OR",
+                    "disableTemplating": true,
+                    "fallbackTo404": false,
+                    "default": true,
                     "crudKey": "id",
                     "callbacks": []
                 }

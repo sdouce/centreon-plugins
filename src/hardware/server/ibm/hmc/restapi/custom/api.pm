@@ -531,11 +531,16 @@ sub wait_cli_jobs {
             foreach my $param ($doc->findnodes('//*[local-name()="Results"]/*[local-name()="JobParameter"]')) {
                 $params->{ xtext($param, 'ParameterName', '') } = xtext($param, 'ParameterValue', '');
             }
+            my $output = defined($params->{result}) ? $params->{result} :
+                join("\n", map { $params->{$_} } grep { $_ !~ /^(?:returnCode|rc)$/ } sort keys %$params);
+            # failed jobs: the error text may only be in the response exception message
+            if ($status ne 'COMPLETED_OK' && $output !~ /\S/) {
+                $output = join(' ', grep { /\S/ } map { my $t = $_->textContent(); $t =~ s/^\s+|\s+$//g; $t } $doc->findnodes('//*[local-name()="Message" or local-name()="ResponseException"]'));
+            }
             $results->{$job_id} = {
                 status => $status,
                 rc => defined($params->{returnCode}) ? $params->{returnCode} : '',
-                output => defined($params->{result}) ? $params->{result} :
-                    join("\n", map { $params->{$_} } grep { $_ !~ /^(?:returnCode|rc)$/ } sort keys %$params)
+                output => $output
             };
             delete $pending{$job_id};
         }
