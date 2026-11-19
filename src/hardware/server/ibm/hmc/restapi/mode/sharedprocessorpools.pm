@@ -99,8 +99,21 @@ sub manage_selection {
             my $name = defined($pool->{name}) ? $pool->{name} : 'pool' . $pool->{id};
             next if is_excluded($name, $self->{option_results}->{include_pool_name}, $self->{option_results}->{exclude_pool_name}, output => $self->{output});
 
-            my $size = first_value($pool->{assignedProcUnits});
-            $size = first_value($pool->{configuredProcUnits}) if !defined($size) || $size == 0;
+            $self->{output}->output_add(
+                long_msg => sprintf(
+                    "pcm pool '%s' [system: %s] raw values: %s", $name, $system->{name},
+                    join(', ', map { $_ . '=' . (defined(first_value($pool->{$_})) ? first_value($pool->{$_}) : 'undef') } sort grep { $_ ne 'name' && $_ ne 'id' } keys %$pool)
+                ),
+                debug => 1
+            );
+
+            # pool size: the default pool (id 0) can use all the physical processor pool (assignedProcUnits).
+            # For user-defined pools, assignedProcUnits only holds the reserved units (often close to 0):
+            # the size is the maximum pool processing units (configuredProcUnits).
+            my ($first, $second) = (defined($pool->{id}) && $pool->{id} == 0) ?
+                ('assignedProcUnits', 'configuredProcUnits') : ('configuredProcUnits', 'assignedProcUnits');
+            my $size = first_value($pool->{$first});
+            $size = first_value($pool->{$second}) if !defined($size) || $size == 0;
             my $used = first_value($pool->{utilizedProcUnits});
             next if !defined($size) || $size == 0 || !defined($used);
 
@@ -125,6 +138,8 @@ __END__
 =head1 MODE
 
 Check shared processor pools usage (Performance and Capacity Monitoring processed metrics).
+Usage is computed against the pool size: the physical processor pool for the default pool,
+the maximum processing units for user-defined pools.
 PCM data collection must be enabled on the managed systems.
 
 =over 8
