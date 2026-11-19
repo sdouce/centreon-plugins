@@ -270,7 +270,7 @@ sub request {
 sub request_json {
     my ($self, %options) = @_;
 
-    my $content = $self->request(%options, accept => 'application/json');
+    my $content = $self->request(%options, accept => defined($options{accept}) ? $options{accept} : 'application/json');
     return undef if is_empty($content);
 
     my $decoded = json_decode($content, output => $self->{output}, no_exit => 1);
@@ -455,7 +455,8 @@ sub get_processed_metrics {
     foreach my $link ($doc->findnodes('//*[local-name()="link"]')) {
         my $href = $link->getAttribute('href');
         next if !defined($href) || $href !~ /\.json$/;
-        return $self->request_json(path => $href);
+        # the HMC answers 406 if the Accept header does not match the file type: use any type
+        return $self->request_json(path => $href, accept => '*/*');
     }
 
     return undef;
