@@ -39,7 +39,7 @@ Vios-redundancy ${tc}
     ...    --
     ...    1
     ...    ${EMPTY}
-    ...    WARNING: partition 'aix02' [system: Server-9009-42A-SN7860001] vfc 'npiv' running VIOS paths: 1/2 [vios1, vios2], configuration: no physical port on VIOS vios2 - partition 'aix02' [system: Server-9009-42A-SN7860001] vscsi 'hdisk3' configuration: reserve policy vios1=SinglePath, vios2=SinglePath | 'vios.client.devices.detected.count'=5;;;0; 'vios.client.devices.nonredundant.count'=1;;;0;5
+    ...    WARNING: partition 'aix02' [system: Server-9009-42A-SN7860001] vfc 'npiv' running VIOS paths: 1/2 [vios1, vios2], configuration: no physical port on VIOS vios2 vfchost1 [server slot 31, client slot 4, client WWPNs C050760A00000022, C050760A00000023] - partition 'aix02' [system: Server-9009-42A-SN7860001] vscsi 'hdisk3' configuration: reserve policy vios1=SinglePath, vios2=SinglePath | 'vios.client.devices.detected.count'=5;;;0; 'vios.client.devices.nonredundant.count'=1;;;0;5
     ...    2
     ...    --include-lpar-name=aix01
     ...    OK: Number of client virtual devices non redundant: 0 - All client virtual devices are redundant | 'vios.client.devices.detected.count'=3;;;0; 'vios.client.devices.nonredundant.count'=0;;;0;3

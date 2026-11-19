@@ -432,7 +432,12 @@ sub get_vios {
             push @{$item->{fc_mappings}}, {
                 client_uuid => uuid_from_href($client->getAttribute('href')),
                 port_name => xtext($mapping, 'Port/PortName', ''),
-                port_wwpn => xtext($mapping, 'Port/WWPN', '')
+                port_wwpn => xtext($mapping, 'Port/WWPN', ''),
+                port_location => xtext($mapping, 'Port/LocationCode', ''),
+                server_adapter => xtext($mapping, 'ServerAdapter/AdapterName', ''),
+                server_slot => xtext($mapping, 'ServerAdapter/VirtualSlotNumber', ''),
+                client_slot => xtext($mapping, 'ClientAdapter/VirtualSlotNumber', xtext($mapping, 'ServerAdapter/ConnectingVirtualSlotNumber', '')),
+                client_wwpns => xtext($mapping, 'ClientAdapter/WWPNs', '')
             };
         }
 

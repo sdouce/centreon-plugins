@@ -159,6 +159,25 @@ sub add_device {
     push @{$device->{issues}}, $options{issue} if defined($options{issue});
 }
 
+# virtual Fibre Channel server adapter description: vfchost name, virtual slots, client WWPNs and physical port
+sub vfc_adapter_desc {
+    my ($self, %options) = @_;
+
+    my $mapping = $options{mapping};
+    my @attrs;
+    push @attrs, 'server slot ' . $mapping->{server_slot} if $mapping->{server_slot} ne '';
+    push @attrs, 'client slot ' . $mapping->{client_slot} if $mapping->{client_slot} ne '';
+    push @attrs, 'client WWPNs ' . join(', ', split(/[\s,]+/, $mapping->{client_wwpns})) if $mapping->{client_wwpns} ne '';
+
+    my $msg = $mapping->{server_adapter} ne '' ? $mapping->{server_adapter} : 'vfc adapter';
+    $msg .= ' [' . join(', ', @attrs) . ']' if @attrs;
+    if ($mapping->{port_name} ne '') {
+        $msg .= ' -> ' . $mapping->{port_name};
+        $msg .= ' (' . $mapping->{port_location} . ')' if $mapping->{port_location} ne '';
+    }
+    return $msg;
+}
+
 sub manage_selection {
     my ($self, %options) = @_;
 
@@ -198,6 +217,14 @@ sub manage_selection {
             }
 
             foreach my $mapping (@{$vios->{fc_mappings}}) {
+                my $desc = $self->vfc_adapter_desc(mapping => $mapping);
+                $self->{output}->output_add(
+                    long_msg => sprintf(
+                        "    vfc mapping [system: %s] [vios: %s] [partition: %s] %s", $system->{name}, $vios->{name},
+                        defined($lpar_names{ $mapping->{client_uuid} }) ? $lpar_names{ $mapping->{client_uuid} } : $mapping->{client_uuid}, $desc
+                    ),
+                    debug => 1
+                );
                 $self->add_device(
                     key => join('~', $system->{name}, $mapping->{client_uuid}, 'vfc'),
                     system => $system->{name},
@@ -207,7 +234,7 @@ sub manage_selection {
                     vios => $vios->{name},
                     # a mapping without physical port does not provide any path
                     vios_running => $running && $mapping->{port_name} ne '',
-                    issue => $mapping->{port_name} eq '' ? "no physical port on VIOS $vios->{name}" : undef
+                    issue => $mapping->{port_name} eq '' ? "no physical port on VIOS $vios->{name} $desc" : undef
                 );
             }
         }
@@ -261,6 +288,9 @@ Virtual optical devices are ignored.
 
 The configuration check raises an alert when a disk mapped from several VIOS does not use the C<no_reserve>
 (or C<PR_shared>) reserve policy, or when a virtual Fibre Channel mapping is not attached to a physical port.
+For virtual Fibre Channel, the alert gives the VIOS server adapter (C<vfchost>), its virtual slot,
+the client adapter virtual slot and WWPNs, to identify the faulty adapter.
+Use C<--debug> to list all the virtual Fibre Channel mappings with their physical port.
 
 =over 8
 
